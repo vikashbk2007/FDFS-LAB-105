@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.rcParams['figure.figsize'] = (10,7)
+sns.set_style("whitegrid")
+
+# Load time series dataset
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/selva86/datasets/master/a10.csv",
+    parse_dates=['date'],
+    index_col='date'
+)
+
+print(df.head())
+print(df.info())
+
+# Plot time series
+plt.plot(df.index, df['value'], color='red')
+plt.title("Monthly Anti-Diabetic Drug Sales in Australia (1992–2008)")
+plt.xlabel("Date")
+plt.ylabel("Sales")
+plt.show()
+
+# Load market dataset
+df_market = pd.read_csv(
+    "https://raw.githubusercontent.com/selva86/datasets/master/MarketArrivals.csv"
+)
+
+# Filter Mumbai market
+df_mumbai = df_market[df_market['market'] == 'MUMBAI']
+print(df_mumbai.head())
+print("Total Mumbai records:", len(df_mumbai))
